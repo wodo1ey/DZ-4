@@ -1,0 +1,33 @@
+#include "math.h"
+#include <iostream>
+using namespace std;
+
+int perevod(int* a, int* b) {
+    int t, i = 0, itog = 0;
+    while (*a) {
+        t = (*a % 10) * pow(*b, i);
+        *a /= 10;
+        itog += t;
+        i++;
+    }
+    return itog;
+}
+
+int minuss(int x, int y, int p) {
+    int x1 = x, y1 = y, p1 = p, xs, ys;
+    xs = perevod(&x1, &p1);
+    ys = perevod(&y1, &p1);
+    return xs - ys;
+}
+
+void main() {
+    int x, y, p, s[80]{}, l = 0, n;
+    cin >> x >> y >> p;
+    n = minuss(x, y, p);
+    do {
+        s[l++] = n % p;
+        n /= p;
+    } while (n != 0);
+    for (int i = l - 1; i > -1; i--) cout << s[i];
+    cout << endl;
+}
